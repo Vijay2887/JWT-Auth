@@ -47,7 +47,7 @@ app.post("/api/login", async (request, response) => {
     response.status(400).send({ error: error.message });
   }
   const token = jwt.sign({ id: findUser._id }, process.env.JWT_SECRET);
-  response.cookie("token", token, { httpOnly: true, maxAge: 1000 * 60 * 10 }); //max age one minute just for testing
+  response.cookie("token", token, { httpOnly: true, maxAge: 1000 * 60 }); //max age one minute just for testing
   response.status(200).send({ msg: "Logged in successfully", token });
 });
 
@@ -58,6 +58,4 @@ app.get("/api/users", isAuthenticated, async (request, response) => {
   response.status(200).send({ allUsers, requestBy: userObj });
 });
 
-app.listen(process.env.PORT, () =>
-  console.log(`Listening at port ${process.env.PORT}`)
-);
+app.listen(4000, () => console.log(`Listening at port 4000`));
